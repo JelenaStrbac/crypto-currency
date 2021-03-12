@@ -4,9 +4,10 @@ import { LinkContainer } from "react-router-bootstrap";
 
 type Props = {
   isAuthenticated: boolean;
+  handleLogin: () => void;
 };
 
-const Header: FC<Props> = ({ isAuthenticated }) => {
+const Header: FC<Props> = ({ isAuthenticated, handleLogin }) => {
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand>Navbar</Navbar.Brand>
@@ -21,7 +22,11 @@ const Header: FC<Props> = ({ isAuthenticated }) => {
         ) : null}
       </Nav>
 
-      {!isAuthenticated ? <Button variant="primary">Login</Button> : null}
+      {!isAuthenticated ? (
+        <Button variant="primary" onClick={handleLogin}>
+          Login
+        </Button>
+      ) : null}
     </Navbar>
   );
 };
