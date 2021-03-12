@@ -1,11 +1,40 @@
-import { FC } from "react";
+import { useState } from "react";
+import { Card, Button } from "react-bootstrap";
 
-type Props = {
-  test?: boolean;
-};
+import { preloadImage } from "../utils/preloadImage";
+import ProfileImg from "../assets/profile.jpg";
 
-const Profile: FC<Props> = ({ test }) => {
-  return <div>Profile</div>;
+preloadImage(ProfileImg);
+
+const Profile = () => {
+  const [avatar, setAvatar] = useState(ProfileImg);
+  const [buttonColor, setButtonColor] = useState("primary");
+
+  const toggleAvatarAndButton = () => {
+    setAvatar((prevAvatar) =>
+      prevAvatar === ProfileImg
+        ? "https://api.hello-avatar.com/adorables/285/strbac.jelena.js@gmail.com"
+        : ProfileImg
+    );
+
+    setButtonColor((prevColor) =>
+      prevColor === "primary" ? "info" : "primary"
+    );
+  };
+
+  return (
+    <Card style={{ width: "18rem", marginTop: "3rem", marginLeft: "6rem" }}>
+      <Card.Img variant="top" src={avatar} />
+      <Card.Body>
+        <Card.Title>Jelena Strbac</Card.Title>
+        <Card.Text>strbac.jelena.js@gmail.com</Card.Text>
+        <Card.Text>https://github.com/JelenaStrbac</Card.Text>
+        <Button variant={buttonColor} onClick={toggleAvatarAndButton}>
+          Toggle avatar
+        </Button>
+      </Card.Body>
+    </Card>
+  );
 };
 
 export default Profile;
