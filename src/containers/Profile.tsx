@@ -23,17 +23,19 @@ const Profile = () => {
   };
 
   return (
-    <Card style={{ width: "18rem", marginTop: "3rem", marginLeft: "6rem" }}>
-      <Card.Img variant="top" src={avatar} />
-      <Card.Body>
-        <Card.Title>Jelena Strbac</Card.Title>
-        <Card.Text>strbac.jelena.js@gmail.com</Card.Text>
-        <Card.Text>https://github.com/JelenaStrbac</Card.Text>
-        <Button variant={buttonColor} onClick={toggleAvatarAndButton}>
-          Toggle avatar
-        </Button>
-      </Card.Body>
-    </Card>
+    <div className="pt-4 px-4 p-md-5">
+      <Card style={{ width: "18rem" }}>
+        <Card.Img variant="top" src={avatar} />
+        <Card.Body>
+          <Card.Title>Jelena Strbac</Card.Title>
+          <Card.Text>strbac.jelena.js@gmail.com</Card.Text>
+          <Card.Text>https://github.com/JelenaStrbac</Card.Text>
+          <Button variant={buttonColor} onClick={toggleAvatarAndButton}>
+            Toggle avatar
+          </Button>
+        </Card.Body>
+      </Card>
+    </div>
   );
 };
 

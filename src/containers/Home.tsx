@@ -79,14 +79,20 @@ const Home = () => {
 
   if (Object.values(Object.values(crypto)).every((el) => el !== null)) {
     renderHomeScreen = (
-      <Table bordered hover>
+      <Table bordered hover responsive>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Symbol</th>
-            <th>Daily change</th>
-            <th>Volume</th>
-            <th>Last price</th>
+            <th style={{ width: "5%", textAlign: "center" }}>#</th>
+            <th
+              style={{
+                width: "35%",
+              }}
+            >
+              Symbol
+            </th>
+            <th style={{ width: "20%" }}>Daily change</th>
+            <th style={{ width: "20%" }}>Volume</th>
+            <th style={{ width: "20%" }}>Last price</th>
           </tr>
         </thead>
         <tbody>
@@ -94,7 +100,9 @@ const Home = () => {
             const key = el as Currencies;
             return (
               <tr key={i}>
-                <td>{i + 1}</td>
+                <td style={{ textAlign: "center", fontWeight: "bold" }}>
+                  {i + 1}
+                </td>
                 <td>{el}</td>
                 <td>{crypto[key]?.["dailyChange"]}</td>
                 <td>{crypto[key]?.["volume"]}</td>
@@ -109,8 +117,8 @@ const Home = () => {
 
   return (
     <div
+      className="pt-4 px-2 p-md-5"
       style={{
-        padding: "4rem",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
