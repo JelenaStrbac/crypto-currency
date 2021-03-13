@@ -2,12 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
 import authReducer from "./slices/authSlice";
-// import criptoReducer from "./slices/criptoSlice";
+import cryptoReducer from "./slices/cryptoSlice";
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    // cripto: criptoReducer,
+    crypto: cryptoReducer,
   },
 });
 
