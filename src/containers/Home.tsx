@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Table } from "react-bootstrap";
+import { Spinner, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { updateCrypto } from "../store/slices/cryptoSlice";
 import { useAppDispatch } from "../store/store";
@@ -75,8 +75,10 @@ const Home = () => {
     };
   }, [dispatch]);
 
-  return (
-    <div style={{ padding: "4rem" }}>
+  let renderHomeScreen = <Spinner animation="border" variant="primary" />;
+
+  if (Object.values(Object.values(crypto)).every((el) => el !== null)) {
+    renderHomeScreen = (
       <Table bordered hover>
         <thead>
           <tr>
@@ -102,6 +104,19 @@ const Home = () => {
           })}
         </tbody>
       </Table>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        padding: "4rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      {renderHomeScreen}
     </div>
   );
 };
