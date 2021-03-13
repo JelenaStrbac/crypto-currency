@@ -5,10 +5,21 @@ import { updateCrypto } from "../store/slices/cryptoSlice";
 import { useAppDispatch } from "../store/store";
 import { Currencies, RootState, ResponseTypes } from "../types";
 
+const formatNumber = (num: number, options?: Intl.NumberFormatOptions) =>
+  new Intl.NumberFormat("en-US", options).format(num);
+
 const getDataForEachCurrency = (data: number[]) => {
-  const dailyChange = data[5];
-  const volume = data[6];
-  const lastPrice = data[7];
+  const dailyChange = formatNumber(data[5], {
+    style: "percent",
+    signDisplay: "always",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+  const volume = formatNumber(data[7], { maximumFractionDigits: 0 });
+  const lastPrice = formatNumber(data[6], {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
   return { dailyChange, volume, lastPrice };
 };
@@ -44,14 +55,18 @@ const Home = () => {
 
     ws.onmessage = (msg) => {
       const data: ResponseTypes = JSON.parse(msg.data);
-
+      console.log(data);
       if (!Array.isArray(data)) {
         channelIds[data.chanId] = data.pair;
       } else {
         const currency = channelIds[data[0]];
-        const currencyDetails = getDataForEachCurrency(data[1]);
 
-        dispatch(updateCrypto({ currency, currencyDetails }));
+        // heart-beating -> if there is no activity in the channel for 15 seconds
+        if (data[1] !== "hb") {
+          const currencyDetails = getDataForEachCurrency(data[1]);
+
+          dispatch(updateCrypto({ currency, currencyDetails }));
+        }
       }
     };
 

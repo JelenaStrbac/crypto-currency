@@ -21,4 +21,4 @@ export type ResponseTypes =
       symbol: string;
       pair: Currencies;
     }
-  | [number, number[]];
+  | [number, number[] | "hb"];
