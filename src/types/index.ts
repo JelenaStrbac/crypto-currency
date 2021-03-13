@@ -1,15 +1,17 @@
 export type Currencies = "BTCUSD" | "BTCEUR" | "ETHUSD" | "ETHEUR" | "EOSUSD";
 
+export type CurrencyDetails = {
+  dailyChange: string;
+  volume: string;
+  lastPrice: string;
+};
+
 export interface RootState {
   auth: {
     isAuthenticated: boolean;
   };
   crypto: {
-    [Key in Currencies]: {
-      dailyChange: number;
-      volume: number;
-      lastPrice: number;
-    };
+    [Key in Currencies]: CurrencyDetails | null;
   };
 }
 

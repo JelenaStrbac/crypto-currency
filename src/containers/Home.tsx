@@ -94,9 +94,9 @@ const Home = () => {
               <tr key={i}>
                 <td>{i + 1}</td>
                 <td>{el}</td>
-                <td>{crypto[key]["dailyChange"]}</td>
-                <td>{crypto[key]["volume"]}</td>
-                <td>{crypto[key]["lastPrice"]}</td>
+                <td>{crypto[key]?.["dailyChange"]}</td>
+                <td>{crypto[key]?.["volume"]}</td>
+                <td>{crypto[key]?.["lastPrice"]}</td>
               </tr>
             );
           })}
