@@ -55,7 +55,7 @@ const Home = () => {
 
     ws.onmessage = (msg) => {
       const data: ResponseTypes = JSON.parse(msg.data);
-      console.log(data);
+
       if (!Array.isArray(data)) {
         channelIds[data.chanId] = data.pair;
       } else {
@@ -75,7 +75,9 @@ const Home = () => {
     };
   }, [dispatch]);
 
-  let renderHomeScreen = <Spinner animation="border" variant="primary" />;
+  let renderHomeScreen = (
+    <Spinner data-testid="spinner" animation="border" variant="primary" />
+  );
 
   if (Object.values(Object.values(crypto)).every((el) => el !== null)) {
     renderHomeScreen = (
